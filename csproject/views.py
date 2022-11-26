@@ -6,15 +6,17 @@ from django.contrib.auth.models import User
 from django.db import transaction
 from .models import Account
 
-
+@login_required
 def homePageView(request):
-	return render(request, 'index.html')
-
+	accounts = Account.objects.exclude(user_id=request.user.id)
+	return render(request, 'index.html', {'accounts': accounts})
 
 @login_required
 def transferView(request):
 	request.session['to'] = request.GET.get('to')
-	request.session['likes'] = int(request.GET.get('likes'))
-	return render(request, 'pages/confirm.html')
+	to = User.objects.get(username=request.session['to'])
+	to.account.likes += 1
+	to.account.save()
+	return redirect('/')
 
 
