@@ -54,6 +54,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'csproject.wsgi.application'
 
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
