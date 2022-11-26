@@ -10,11 +10,19 @@ def homePageView(request):
 	return render(request, 'index.html', {'accounts': accounts})
 
 @login_required
-def transferView(request):
+def likeView(request):
 	request.session['to'] = request.GET.get('to')
 	to = User.objects.get(username=request.session['to'])
 	to.account.likes += 1
 	to.account.save()
 	return redirect('/')
 
-
+@login_required
+def profileView(request):
+	profile = request.POST['profile']
+	print(profile)
+	accounts = Account.objects.exclude(user_id=request.user.id)
+	cur_acc = Account.objects.get(user_id=request.user.id)
+	cur_acc.profile = profile
+	cur_acc.save()
+	return redirect('/')

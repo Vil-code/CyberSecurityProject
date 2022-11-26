@@ -6,30 +6,40 @@
 </head>
 
 <body>
-    <h1>User </h1>
+    <h1> User </h1>
     <table>
         <tr>
             <th style="text-align:left"> Username: {{user.username}}
             <td>
         <tr>
-            <th style="text-align:left"> Likes: {{user.account.likes}}
+            <th style="text-align:left"> Likes: {{user.account.likes}} 
             <td>
-        <!-- <tr>
-            <th style="text-align:left"> Friends:
-            <td> -->
+        <tr>
+            <tr>
+                <th style="text-align:left"> {{ user.account.profile | safe }}
+                <td>
+            <tr>
+    
+                
+            <td>
+                <form id='profile' action='profile/' method="POST">
+                    {% csrf_token %}
+                    <input type="text" name="profile" value="profile" />
+                    <input type="submit" value="add description"/>
+                </form>
     </table>
     <form action='logout/' method="POST">
         {% csrf_token %}
         <input type="submit" value="Logout" />
     </form>
     <h2> </h2>
-    <form id='transfer' action='transfer/' method="GET">
-        <span>To:</span><br/>
+    <form id='like' action='like/' method="GET">
+        <span>Add like to:</span><br />
         <select name="to">
-        {% for account in accounts %}
+            {% for account in accounts %}
             <option value="{{account.user.username}}">{{account.user.username}}</option>
-        {% endfor %}
-        </select><br/>
+            {% endfor %}
+        </select><br />
         <input type="submit" value="Like" />
     </form>
 </body>
