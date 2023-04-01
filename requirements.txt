@@ -1,3 +1,6 @@
 asgiref==3.6.0
 Django==4.0.2
+django-axes==5.40.1
+django-brutebuster==0.1.8
+django-ipware==5.0.0
 sqlparse==0.4.3
