@@ -9,7 +9,7 @@ def homePageView(request):
 	accounts = Account.objects.exclude(user_id=request.user.id)
 	return render(request, 'index.html', {'accounts': accounts})
 
-@login_required
+# @login_required
 def likeView(request):
 	request.session['to'] = request.GET.get('to')
 	to = User.objects.get(username=request.session['to'])
